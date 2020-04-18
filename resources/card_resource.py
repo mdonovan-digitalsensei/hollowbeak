@@ -17,15 +17,12 @@ class Card(Resource):
         "board_id", type=int, required=True, help="This field cannot be left blank!"
     )
 
-    def get(self, _id):
-        card = CardModel.find_by_id(_id)
+    def get(self, card_id):
+        card = CardModel.find_by_id(card_id)
         if card:
             return card.json()
 
-    def post(self, _id):
-        if CardModel.find_by_id(_id):
-            return ({"message": "Item already exists"}, 400)
-
+    def post(self):
         data = Card.parser.parse_args()
         card = CardModel(data["title"], data["is_done"], data["schedule"], data["board_id"])
         card.save_to_db()

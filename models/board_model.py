@@ -1,7 +1,7 @@
 from db import db
 
 
-class BoardModel:
+class BoardModel(db.Model):
     __tablename__ = "boards"
     id = db.Column(db.Integer, primary_key=True)
     board = db.Column(db.String(80))
@@ -9,7 +9,12 @@ class BoardModel:
     cards = db.relationship('CardModel', lazy='dynamic')
 
     def __init__(self, board):
-        self.title = board
+        self.board = board
+
+    def json(self):
+        return {
+            "board": self.board, "cards": [card.json() for card in self.cards.all()]
+        }
 
     def save_to_db(self):
         db.session.add(self)
