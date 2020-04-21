@@ -5,6 +5,7 @@ from security import authenticate, identity
 from resources.user_resource import UserRegister
 from resources.card_resource import Card
 from resources.board_resource import Board
+from ma import ma
 
 from db import db
 
@@ -30,4 +31,5 @@ jwt = JWT(app, authenticate, identity)
 
 if __name__ == "__main__":
     db.init_app(app)
+    ma.init_app(app)
     app.run(debug=True)
