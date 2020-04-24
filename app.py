@@ -4,7 +4,7 @@ from flask_jwt import JWT
 from security import authenticate, identity
 from resources.user_resource import UserRegister
 from resources.card_resource import Card
-from resources.board_resource import Board
+from resources.board_resource import Board, BoardCreate
 from ma import ma
 
 from db import db
@@ -24,7 +24,7 @@ def create_tables():
 api.add_resource(UserRegister, "/register")
 api.add_resource(Card, "/card/<int:card_id>")
 api.add_resource(Board, "/board/<int:board_id>")
-
+api.add_resource(BoardCreate, "/createboard")
 
 jwt = JWT(app, authenticate, identity)
 

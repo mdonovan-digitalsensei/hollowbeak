@@ -1,9 +1,12 @@
-from marshmallow import Schema, fields
+from ma import ma
+from models.board_model import BoardModel
+from models.card_model import CardModel
 
 
-class BoardScema(Schema):
+class BoardSchema(ma.ModelSchema):
+    items = ma.Nested(CardModel, many=True)
+
     class Meta:
+        model = BoardModel
         dump_only = ("id",)
-
-    id = fields.Int()
-    board = fields.Str(required=True)
+        include_fk = True

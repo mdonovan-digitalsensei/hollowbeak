@@ -1,6 +1,7 @@
 from ma import ma
 from models.user_model import UserModel
 
+
 class UserSchema(ma.ModelSchema):
     class Meta:
         model = UserModel

@@ -1,12 +1,11 @@
-from marshmallow import Schema, fields
+from ma import ma
+from models.card_model import CardModel
+from models.board_model import BoardModel
 
 
-class CardSchema(Schema):
+class CardSchema(ma.ModelSchema):
+
     class Meta:
+        model = CardModel
         dump_only = ("id",)
-
-    id = fields.Int()
-    title = fields.Str(required=True)
-    is_done = fields.Bool(required=True)
-    schedule = fields.Int(required=True)
-    board_id = fields.Int(required=True)
+        include_fk = True
