@@ -5,7 +5,9 @@ class BoardModel(db.Model):
     __tablename__ = "boards"
     id = db.Column(db.Integer, primary_key=True)
     board = db.Column(db.String(80), nullable=False)
+    owner_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     cards = db.relationship('CardModel', lazy='dynamic')
+    user = db.relationship('UserModel')
 
     def save_to_db(self):
         db.session.add(self)
